@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-first-pod
+  labels:
+    app: my-app
+spec:
+  containers:
+    - name: my-container
+      image: python:3.11-slim
+      command: ["python3", "-c"]
+      args: ["print('Hello from Kubernetes!'); import time; time.sleep(3600)"]
