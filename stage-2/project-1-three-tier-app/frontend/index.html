@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My 3-Tier App</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+        #messages { margin-top: 20px; }
+        .message { padding: 10px; background: #f0f0f0; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>🐳 My 3-Tier Docker App</h1>
+    <button onclick="loadMessages()">Load Messages</button>
+    <div id="messages"></div>
+
+    <script>
+        async function loadMessages() {
+            const response = await fetch("/api/messages");
+            const data = await response.json();
+            const div = document.getElementById("messages");
+            div.innerHTML = data.messages
+                .map(m => `<div class="message">${m}</div>`)
+                .join("");
+        }
+    </script>
+</body>
+</html>
