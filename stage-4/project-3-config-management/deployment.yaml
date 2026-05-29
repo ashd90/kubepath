@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-app
+  template:
+    metadata:
+      labels:
+        app: config-app
+    spec:
+      containers:
+        - name: config-container
+          image: python:3.11-slim
+          command: ["python3", "-c"]
+          args:
+            - |
+              import os
+              import time
+              print(f"ENV: {os.getenv('APP_ENV')}")
+              print(f"MESSAGE: {os.getenv('APP_MESSAGE')}")
+              print(f"VERSION: {os.getenv('APP_VERSION')}")
+              print(f"DB_PASSWORD: {os.getenv('DB_PASSWORD')}")
+              print(f"API_KEY: {os.getenv('API_KEY')}")
+              time.sleep(3600)
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secret
