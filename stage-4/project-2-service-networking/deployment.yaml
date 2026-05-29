@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask-container
+          image: python:3.11-slim
+          command: ["python3", "-c"]
+          args:
+            - |
+              import http.server
+              import socketserver
+              import os
+              handler = http.server.SimpleHTTPRequestHandler
+              with socketserver.TCPServer(("", 8080), handler) as httpd:
+                  print("serving at port 8080")
+                  httpd.serve_forever()
+          ports:
+            - containerPort: 8080
