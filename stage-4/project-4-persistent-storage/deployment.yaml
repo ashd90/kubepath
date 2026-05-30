@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: storage-app
+  template:
+    metadata:
+      labels:
+        app: storage-app
+    spec:
+      containers:
+        - name: storage-container
+          image: python:3.11-slim
+          command: ["python3", "-u", "-c"]
+          args:
+            - |
+              import time
+              import os
+              os.makedirs("/app/data", exist_ok=True)
+              count = 0
+              while True:
+                  count += 1
+                  with open("/app/data/counter.txt", "w") as f:
+                      f.write(str(count))
+                  print(f"Written count: {count}")
+                  time.sleep(5)
+          volumeMounts:
+            - name: my-storage
+              mountPath: /app/data
+      volumes:
+        - name: my-storage
+          persistentVolumeClaim:
+            claimName: my-pvc
