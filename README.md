@@ -15,21 +15,96 @@ Every concept follows: **Analogy → Problem → Solution → Project → Debug 
 
 | Stage | Topic | Status |
 |-------|-------|--------|
-| 0 | Environment & Basics | ✅ |
-| 1 | Docker Fundamentals (5 projects) | ✅ |
-| 2 | Multi Container Systems | ✅ |
-| 3 | Kubernetes Motivation | ✅ |
+| 0 | Environment & Basics | ✅ Done |
+| 1 | Docker Fundamentals (5 projects) | ✅ Done |
+| 2 | Multi Container Systems | ✅ Done |
+| 3 | Kubernetes Motivation | ✅ Done |
 | 4 | Kubernetes Beginner Projects | 🔄 In Progress |
-| 5 | Production Kubernetes (Minikube) | ⏳ |
-| 5b | Self Managed Kubernetes (kubeadm) | ⏳ |
-| 5c | Managed Kubernetes (AKS) | ⏳ |
-| 6 | Helm | ⏳ |
-| 7 | Istio Service Mesh | ⏳ |
-| 🏁 | Capstone Project | ⏳ |
+| 5 | Production Kubernetes (Minikube) | ⏳ Upcoming |
+| 5b | Self Managed Kubernetes (kubeadm) | ⏳ Upcoming |
+| 5c | Managed Kubernetes (AKS) | ⏳ Upcoming |
+| 6 | Helm | ⏳ Upcoming |
+| 7 | Istio Service Mesh | ⏳ Upcoming |
+| 🏁 | Capstone Project | ⏳ Upcoming |
 
 ---
 
 ## 📁 Repository Structure
+
+<pre>
+kubepath/
+├── README.md
+├── stage-0/
+│   └── project-1-no-docker/
+│       └── app.py
+├── stage-1/
+│   ├── project-1-first-container/
+│   │   ├── Dockerfile
+│   │   └── app.py
+│   ├── project-2-first-dockerfile/
+│   │   ├── Dockerfile
+│   │   ├── app.py
+│   │   └── requirements.txt
+│   ├── project-3-env-variables/
+│   │   ├── Dockerfile
+│   │   ├── app.py
+│   │   ├── requirements.txt
+│   │   ├── .env                  # gitignored
+│   │   └── .gitignore
+│   ├── project-4-persistent-storage/
+│   │   ├── Dockerfile
+│   │   ├── app.py
+│   │   ├── requirements.txt
+│   │   └── data/                 # mounted volume
+│   └── project-5-container-networking/
+│       ├── Dockerfile
+│       ├── app.py
+│       └── requirements.txt
+├── stage-2/
+│   └── project-1-three-tier-app/
+│       ├── docker-compose.yml
+│       ├── frontend/
+│       │   ├── Dockerfile
+│       │   ├── index.html
+│       │   └── nginx.conf
+│       ├── backend/
+│       │   ├── Dockerfile
+│       │   ├── app.py
+│       │   └── requirements.txt
+│       └── db/
+│           └── init.sql
+├── stage-4/
+│   ├── project-1-single-container/
+│   │   ├── pod.yaml
+│   │   └── deployment.yaml
+│   ├── project-2-service-networking/
+│   │   ├── deployment.yaml
+│   │   └── service.yaml
+│   ├── project-3-config-management/
+│   │   ├── configmap.yaml
+│   │   ├── secret.yaml
+│   │   └── deployment.yaml
+│   ├── project-4-persistent-storage/
+│   │   ├── pv.yaml
+│   │   ├── pvc.yaml
+│   │   └── deployment.yaml
+│   └── project-5-scaling-healthchecks/
+│       ├── deployment.yaml
+│       └── hpa.yaml
+├── stage-5/
+│   └── project-1-production-k8s/
+├── stage-5b/
+│   └── project-1-kubeadm/
+│       └── setup-guide.md
+├── stage-5c/
+│   └── project-1-aks/
+│       └── setup-guide.md
+├── stage-6/
+│   └── project-1-helm-charts/
+└── stage-7/
+    └── project-1-istio-mesh/
+</pre>
+
 ---
 
 ## 🛠️ Tools
@@ -63,6 +138,22 @@ Every concept follows: **Analogy → Problem → Solution → Project → Debug 
 | Ingress & RBAC | 5 |
 | Helm Charts | 6 |
 | Istio mTLS & Canary | 7 |
+
+---
+
+## 📈 Progress
+
+- [x] Stage 0 — Environment & Basics
+- [x] Stage 1 — Docker Fundamentals
+- [x] Stage 2 — Multi Container Systems
+- [x] Stage 3 — Kubernetes Motivation
+- [ ] Stage 4 — Kubernetes Beginner Projects (in progress)
+- [ ] Stage 5 — Production Kubernetes
+- [ ] Stage 5b — Self Managed Kubernetes (kubeadm)
+- [ ] Stage 5c — Managed Kubernetes (AKS)
+- [ ] Stage 6 — Helm
+- [ ] Stage 7 — Istio
+- [ ] Final Capstone Project
 
 ---
 
