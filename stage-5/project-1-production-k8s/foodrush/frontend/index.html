@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FoodRush 🍕</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+        header {
+            background: #e23744;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 { font-size: 2em; }
+        header p  { font-size: 0.9em; margin-top: 5px; }
+        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .section-title {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #333;
+            border-left: 4px solid #e23744;
+            padding-left: 10px;
+        }
+        .restaurants { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .card h3 { color: #e23744; margin-bottom: 8px; }
+        .card p  { color: #666; font-size: 0.9em; margin: 4px 0; }
+        .card button {
+            margin-top: 12px;
+            width: 100%;
+            padding: 10px;
+            background: #e23744;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+        .card button:hover { background: #c0392b; }
+        .rating { color: #f39c12; font-weight: bold; }
+        #order-status {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+        #order-status h3 { color: #27ae60; margin-bottom: 10px; }
+        #order-status p  { color: #555; margin: 4px 0; }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            background: #e8f8f0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .loading { text-align: center; color: #999; padding: 40px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🍕 FoodRush</h1>
+    <p>Production Grade Food Delivery — Powered by Kubernetes</p>
+</header>
+
+<div class="container">
+    <h2 class="section-title">Restaurants Near You</h2>
+    <div class="restaurants" id="restaurants">
+        <div class="loading">Loading restaurants...</div>
+    </div>
+
+    <div id="order-status">
+        <h3>✅ Order Placed Successfully!</h3>
+        <p><strong>Order ID:</strong> <span id="order-id"></span></p>
+        <p><strong>Restaurant:</strong> <span id="order-restaurant"></span></p>
+        <p><strong>Items:</strong> <span id="order-items"></span></p>
+        <p><strong>Status:</strong> <span class="badge">placed</span></p>
+    </div>
+</div>
+
+<script>
+    // Load restaurants on page load
+    async function loadRestaurants() {
+        try {
+            const res = await fetch("/api/restaurants");
+            const data = await res.json();
+            const container = document.getElementById("restaurants");
+            container.innerHTML = data.restaurants.map(r => `
+                <div class="card">
+                    <h3>${r.name}</h3>
+                    <p>🍽️ ${r.cuisine}</p>
+                    <p class="rating">⭐ ${r.rating}</p>
+                    <p>🕐 ${r.delivery_time} mins</p>
+                    <button onclick="placeOrder(${r.id}, '${r.name}')">
+                        Order Now
+                    </button>
+                </div>
+            `).join("");
+        } catch(e) {
+            document.getElementById("restaurants").innerHTML =
+                "<p>Failed to load restaurants. Please try again.</p>";
+        }
+    }
+
+    async function placeOrder(restaurantId, restaurantName) {
+        try {
+            const res = await fetch("/api/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    user_id: "user123",
+                    restaurant_id: restaurantId,
+                    items: ["Special of the day"]
+                })
+            });
+            const data = await res.json();
+            const status = document.getElementById("order-status");
+            document.getElementById("order-id").textContent = data.order.order_id;
+            document.getElementById("order-restaurant").textContent = restaurantName;
+            document.getElementById("order-items").textContent = data.order.items.join(", ");
+            status.style.display = "block";
+            status.scrollIntoView({ behavior: "smooth" });
+        } catch(e) {
+            alert("Failed to place order. Please try again.");
+        }
+    }
+
+    loadRestaurants();
+</script>
+</body>
+</html>
