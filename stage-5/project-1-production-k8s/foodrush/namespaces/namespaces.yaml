@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: foodrush-frontend
+  labels:
+    app: foodrush
+    tier: frontend
+    team: frontend-team
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: foodrush-backend
+  labels:
+    app: foodrush
+    tier: backend
+    team: backend-team
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: foodrush-data
+  labels:
+    app: foodrush
+    tier: data
+    team: data-team
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: foodrush-monitoring
+  labels:
+    app: foodrush
+    tier: monitoring
+    team: devops-team
