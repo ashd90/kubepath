@@ -20,7 +20,7 @@ Every concept follows: **Analogy → Problem → Solution → Project → Debug 
 | 2 | Multi Container Systems | ✅ Done |
 | 3 | Kubernetes Motivation | ✅ Done |
 | 4 | Kubernetes Beginner Projects (extended) | 🔄 In Progress |
-| 5 | Production Kubernetes (Minikube) | ⏳ Upcoming |
+| 5 | Production Kubernetes (Minikube) | ✅ Done |
 | 5b | Self Managed Kubernetes (kubeadm) | ⏳ Upcoming |
 | 5c | Managed Kubernetes (AKS) | ⏳ Upcoming |
 | 6 | Helm | ⏳ Upcoming |
