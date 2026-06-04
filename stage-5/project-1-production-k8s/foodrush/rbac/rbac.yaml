@@ -1,0 +1,123 @@
+# ServiceAccount for restaurant-service
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: restaurant-service-sa
+  namespace: foodrush-backend
+---
+# ServiceAccount for order-service
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: order-service-sa
+  namespace: foodrush-backend
+---
+# ServiceAccount for frontend
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: frontend-sa
+  namespace: foodrush-frontend
+---
+# Role: backend developer permissions
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: backend-developer
+  namespace: foodrush-backend
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "configmaps"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get", "list"]
+---
+# Role: frontend developer permissions
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: frontend-developer
+  namespace: foodrush-frontend
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "configmaps"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get", "list"]
+---
+# Role: data team read only
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: data-readonly
+  namespace: foodrush-data
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "persistentvolumeclaims"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets"]
+    verbs: ["get", "list", "watch"]
+---
+# ClusterRole: devops full access
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: foodrush-devops
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+---
+# RoleBinding: bind backend-developer role to restaurant-service-sa
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: restaurant-service-binding
+  namespace: foodrush-backend
+subjects:
+  - kind: ServiceAccount
+    name: restaurant-service-sa
+    namespace: foodrush-backend
+roleRef:
+  kind: Role
+  name: backend-developer
+  apiGroup: rbac.authorization.k8s.io
+---
+# RoleBinding: bind frontend-developer to frontend-sa
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: frontend-binding
+  namespace: foodrush-frontend
+subjects:
+  - kind: ServiceAccount
+    name: frontend-sa
+    namespace: foodrush-frontend
+roleRef:
+  kind: Role
+  name: frontend-developer
+  apiGroup: rbac.authorization.k8s.io
+---
+# RoleBinding: data team readonly
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: data-readonly-binding
+  namespace: foodrush-data
+subjects:
+  - kind: ServiceAccount
+    name: restaurant-service-sa
+    namespace: foodrush-backend
+roleRef:
+  kind: Role
+  name: data-readonly
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: restaurant-service-monitor
+  namespace: foodrush-monitoring
+  labels:
+    release: foodrush-monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - foodrush-backend
+  selector:
+    matchLabels:
+      app: restaurant-service
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
