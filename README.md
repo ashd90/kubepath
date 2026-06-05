@@ -1,37 +1,35 @@
-# 🚀 My DevOps Journey — Docker to Production Kubernetes
+# 🚀 kubepath — Docker to Production Kubernetes
 
-A complete hands-on learning path covering Docker, Kubernetes, ArgoCD, Helm, and Istio
-from absolute beginner to production-ready deployments.
+A complete hands-on learning path from Docker basics to production-grade Kubernetes,
+ArgoCD GitOps, Helm, and Istio Service Mesh.
 
 ---
 
 ## 👤 About
 
-Personal DevOps learning journey through micro-projects.
-Every concept follows: **Analogy → Problem → Solution → Project → Debug → Challenge**
+Personal DevOps learning journey through real-world micro-projects.
+Every concept follows: **Analogy → Problem → Solution → Hands-on → Debug → Challenge**
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ Learning Path
 
-| Stage | Topic | Status |
-|-------|-------|--------|
-| 0 | Environment and Basics | ✅ Done |
-| 1 | Docker Fundamentals (5 projects) | ✅ Done |
-| 2 | Multi Container Systems | ✅ Done |
-| 3 | Kubernetes Motivation | ✅ Done |
-| 4 | Kubernetes Beginner Projects | ✅ Done |
-| 4-ext | Workloads: StatefulSets, DaemonSets, Jobs, CronJobs | ⏳ Upcoming |
-| 4-ext | Scheduling: VPA, Node Affinity, Taints, Resource Quotas | ⏳ Upcoming |
-| 4-ext | Security: PSS, Image Scanning, Network Policies | ⏳ Upcoming |
-| 4-ext | Cluster Admin: Upgrade, CRDs | ⏳ Upcoming |
-| 5 | Production Kubernetes - FoodRush App | ✅ Done |
-| 5b | Self Managed Kubernetes (kubeadm) | ⏳ Upcoming |
-| 5c | Managed Kubernetes (AKS) | ⏳ Upcoming |
-| 5d | ArgoCD - GitOps In Depth | ⏳ Upcoming |
-| 6 | Helm - In Depth | ⏳ Upcoming |
-| 7 | Istio Service Mesh - In Depth | ⏳ Upcoming |
-| 🏁 | Capstone Project | ⏳ Upcoming |
+| # | Directory | Topic | Status |
+|---|-----------|-------|--------|
+| 01 | 01-docker-fundamentals | Containers, Dockerfiles, Volumes, Networking | ✅ Done |
+| 02 | 02-multi-container-docker | Docker Compose, 3-tier app | ✅ Done |
+| 03 | 03-kubernetes-basics | Pods, Deployments, Services, ConfigMaps, HPA | ✅ Done |
+| 04 | 04-kubernetes-workloads | StatefulSets, DaemonSets, Jobs, CronJobs | ⏳ Upcoming |
+| 05 | 05-kubernetes-scheduling | VPA, Node Affinity, Taints, Resource Quotas | ⏳ Upcoming |
+| 06 | 06-kubernetes-security | PSS, Image Scanning, Network Policies | ⏳ Upcoming |
+| 07 | 07-kubernetes-cluster-admin | Cluster Upgrade, CRDs | ⏳ Upcoming |
+| 08 | 08-production-kubernetes | FoodRush production app, Ingress, RBAC, Observability | ✅ Done |
+| 09 | 09-self-managed-cluster | kubeadm, multi-node cluster setup | ⏳ Upcoming |
+| 10 | 10-managed-cloud-kubernetes | AKS, cloud storage, cost optimization | ⏳ Upcoming |
+| 11 | 11-gitops-argocd | ArgoCD, GitOps, App of Apps, multi-env | ⏳ Upcoming |
+| 12 | 12-helm | Helm charts, templates, dependencies | ⏳ Upcoming |
+| 13 | 13-istio-service-mesh | Traffic management, mTLS, canary, observability | ⏳ Upcoming |
+| 14 | 14-capstone-project | Full production simulation | ⏳ Upcoming |
 
 ---
 
@@ -39,162 +37,152 @@ Every concept follows: **Analogy → Problem → Solution → Project → Debug 
 
 <pre>
 kubepath/
-├── README.md
-├── stage-0/
-│   └── project-1-no-docker/
-│       └── app.py
-├── stage-1/
-│   ├── project-1-first-container/
-│   ├── project-2-first-dockerfile/
-│   ├── project-3-env-variables/
-│   ├── project-4-persistent-storage/
-│   └── project-5-container-networking/
-├── stage-2/
-│   └── project-1-three-tier-app/
-│       ├── docker-compose.yml
+├── 01-docker-fundamentals/
+│   ├── 01-no-docker-problem/          # running apps without docker, dependency hell
+│   ├── 02-first-container/            # first docker run, images vs containers
+│   ├── 03-dockerfile-basics/          # writing dockerfiles, layer caching
+│   ├── 04-env-variables/              # -e flag, .env files, runtime config
+│   ├── 05-persistent-storage/         # bind mounts, named volumes
+│   └── 06-container-networking/       # docker networks, container DNS
+├── 02-multi-container-docker/
+│   └── three-tier-app/                # frontend+backend+postgres, docker compose
+├── 03-kubernetes-basics/
+│   ├── 01-pods-and-deployments/       # pod lifecycle, self healing deployments
+│   ├── 02-services-networking/        # clusterIP, nodePort, load balancing
+│   ├── 03-configmaps-secrets/         # config injection, secret management
+│   ├── 04-persistent-storage/         # PV, PVC, static vs dynamic provisioning
+│   └── 05-hpa-healthchecks/           # liveness, readiness, autoscaling
+├── 04-kubernetes-workloads/
+│   ├── statefulsets/                  # ordered pods, stable network identity
+│   ├── daemonsets/                    # one pod per node, log collectors
+│   ├── replicasets/                   # how deployments manage pods under hood
+│   ├── jobs/                          # batch processing, run to completion
+│   └── cronjobs/                      # scheduled tasks, cleanup jobs
+├── 05-kubernetes-scheduling/
+│   ├── hpa-production/                # real world autoscaling with foodrush
+│   ├── vpa/                           # vertical pod autoscaler
+│   ├── node-affinity/                 # pod placement rules
+│   ├── taints-tolerations/            # node restrictions and exceptions
+│   └── resource-quotas/               # namespace level resource budgets
+├── 06-kubernetes-security/
+│   ├── pod-security-standards/        # restrict pod capabilities
+│   ├── image-scanning/                # trivy, vulnerability detection
+│   ├── network-policies/              # firewall rules between pods
+│   └── secrets-encryption/            # encrypt secrets at rest in etcd
+├── 07-kubernetes-cluster-admin/
+│   ├── cluster-upgrade/               # rolling upgrades, zero downtime
+│   └── crds/                          # extending kubernetes API
+├── 08-production-kubernetes/
+│   ├── ingress-learning/              # nginx ingress, path and host routing
+│   └── foodrush/                      # production grade food delivery app
+│       ├── kustomization.yaml         # kubectl apply -k . deploys everything
+│       ├── namespaces/
+│       ├── database/
+│       ├── restaurant-service/
+│       ├── order-service/
+│       ├── api-gateway/
 │       ├── frontend/
-│       ├── backend/
-│       └── db/
-├── stage-4/
-│   ├── project-1-single-container/
-│   ├── project-2-service-networking/
-│   ├── project-3-config-management/
-│   ├── project-4-persistent-storage/
-│   ├── project-5-scaling-healthchecks/
-│   ├── project-6-workloads/
-│   │   ├── statefulsets/
-│   │   ├── daemonsets/
-│   │   ├── replicasets/
-│   │   ├── jobs/
-│   │   └── cronjobs/
-│   ├── project-7-scheduling/
-│   │   ├── hpa-production/
-│   │   ├── vpa/
-│   │   ├── node-affinity/
-│   │   ├── taints-tolerations/
-│   │   └── resource-quotas/
-│   ├── project-8-security/
-│   │   ├── pod-security-standards/
-│   │   ├── image-scanning/
-│   │   ├── network-policies/
-│   │   └── secrets-encryption/
-│   └── project-9-cluster-admin/
-│       ├── cluster-upgrade/
-│       └── crds/
-├── stage-5/
-│   └── project-1-production-k8s/
-│       ├── ingress/                   # ingress learning exercises
-│       └── foodrush/                  # production grade app
-│           ├── kustomization.yaml     # single command deploy
-│           ├── namespaces/
-│           ├── database/
-│           ├── restaurant-service/
-│           ├── order-service/
-│           ├── api-gateway/
-│           ├── frontend/
-│           ├── ingress/
-│           ├── rbac/
-│           ├── resource-management/
-│           ├── rolling-updates/
-│           └── monitoring/
-├── stage-5b/
-│   └── project-1-kubeadm/             # self managed cluster
-├── stage-5c/
-│   └── project-1-aks/                 # managed cloud k8s
-├── stage-5d/
-│   └── project-1-argocd/              # gitops in depth
-│       ├── install/
-│       ├── applications/
-│       ├── app-of-apps/
-│       ├── multi-env/
-│       └── advanced/
-├── stage-6/
-│   └── project-1-helm-charts/         # helm in depth
-│       ├── basics/
-│       ├── foodrush-chart/
-│       ├── dependencies/
-│       └── advanced/
-├── stage-7/
-│   └── project-1-istio-mesh/          # istio in depth
-│       ├── install/
-│       ├── traffic-management/
-│       ├── canary/
-│       ├── mtls/
-│       └── observability/
-└── capstone/
-    ├── ci-cd/
-    ├── multi-env/
-    ├── monitoring/
-    └── microservices/
+│       ├── ingress/
+│       ├── rbac/
+│       ├── resource-management/
+│       ├── rolling-updates/
+│       └── monitoring/
+├── 09-self-managed-cluster/
+│   └── kubeadm-setup/                 # 3 node cluster from scratch
+├── 10-managed-cloud-kubernetes/
+│   └── aks-deployment/                # azure kubernetes service
+├── 11-gitops-argocd/
+│   ├── install/                       # argocd setup on minikube
+│   ├── applications/                  # deploying apps via argocd
+│   ├── app-of-apps/                   # managing multiple apps
+│   ├── multi-env/                     # dev staging prod with argocd
+│   └── advanced/                      # sync policies, hooks, notifications
+├── 12-helm/
+│   ├── basics/                        # chart structure, templates, values
+│   ├── foodrush-chart/                # convert foodrush to helm chart
+│   ├── dependencies/                  # chart dependencies, subcharts
+│   └── advanced/                      # hooks, tests, library charts
+├── 13-istio-service-mesh/
+│   ├── install/                       # istio setup, sidecar injection
+│   ├── traffic-management/            # virtual services, destination rules
+│   ├── canary/                        # gradual traffic shifting
+│   ├── mtls/                          # mutual TLS between services
+│   └── observability/                 # kiali, jaeger, prometheus
+└── 14-capstone-project/
+    ├── ci-cd/                             # github actions pipeline
+    ├── multi-env/                         # dev staging prod namespaces
+    ├── monitoring/                        # full observability stack
+    └── microservices/                     # full microservices architecture
 </pre>
 
 ---
 
 ## 🛠️ Tools and Technologies
 
-| Tool | Purpose | Stage |
-|------|---------|-------|
-| Docker | Containerization | 1 |
-| Docker Compose | Multi-container orchestration | 2 |
-| Kubernetes | Container orchestration | 4 |
-| Minikube | Local K8s cluster | 4 |
-| Kustomize | K8s config management | 5 |
-| kubeadm | Self managed cluster setup | 5b |
-| AKS | Managed cloud Kubernetes | 5c |
-| ArgoCD | GitOps continuous delivery | 5d |
-| Helm | Kubernetes package manager | 6 |
-| Istio | Service mesh | 7 |
-| Prometheus | Metrics collection | 5 |
-| Grafana | Metrics visualization | 5 |
+| Tool | Purpose | Directory |
+|------|---------|-----------|
+| Docker | Containerization | 01, 02 |
+| Docker Compose | Multi-container orchestration | 02 |
+| Kubernetes | Container orchestration | 03-08 |
+| Minikube | Local K8s cluster | 03-08 |
+| Kustomize | K8s config management | 08 |
+| kubeadm | Self managed cluster | 09 |
+| AKS | Managed cloud Kubernetes | 10 |
+| ArgoCD | GitOps continuous delivery | 11 |
+| Helm | Kubernetes package manager | 12 |
+| Istio | Service mesh | 13 |
+| Prometheus | Metrics collection | 08, 13 |
+| Grafana | Metrics visualization | 08, 13 |
+| Trivy | Image vulnerability scanning | 06 |
 
 ---
 
-## 📚 Key Concepts by Stage
+## 📚 Key Concepts by Directory
 
-| Concept | Stage |
-|---------|-------|
-| Containers and Dockerfiles | 1 |
-| Layer Caching | 1 |
-| Volumes and Networks | 1-2 |
-| Docker Compose | 2 |
-| Pod and Deployment | 4 |
-| Service and Networking | 4 |
-| ConfigMap and Secret | 4 |
-| PersistentVolume and PVC | 4 |
-| HPA and Health Checks | 4 |
-| StatefulSets, DaemonSets | 4-ext |
-| Jobs and CronJobs | 4-ext |
-| VPA, Node Affinity, Taints | 4-ext |
-| Network Policies, PSS | 4-ext |
-| CRDs, Cluster Upgrade | 4-ext |
-| Namespaces and RBAC | 5 |
-| Ingress and Annotations | 5 |
-| Resource Management | 5 |
-| Rolling Updates and Rollback | 5 |
-| Observability | 5 |
-| Kustomize | 5 |
-| GitOps with ArgoCD | 5d |
-| Helm Charts | 6 |
-| Istio Traffic Management | 7 |
-| Istio mTLS and Canary | 7 |
+| Concept | Directory |
+|---------|-----------|
+| Containers, Dockerfiles, Layer Caching | 01 |
+| Volumes, Networks, Environment Variables | 01 |
+| Docker Compose, Service Communication | 02 |
+| Pods, Deployments, Self Healing | 03 |
+| Services, ClusterIP, NodePort | 03 |
+| ConfigMaps, Secrets | 03 |
+| PersistentVolume, PVC, StorageClass | 03 |
+| HPA, Liveness, Readiness Probes | 03 |
+| StatefulSets, DaemonSets, ReplicaSets | 04 |
+| Jobs, CronJobs | 04 |
+| VPA, Node Affinity, Taints, Tolerations | 05 |
+| Resource Quotas, LimitRange | 05 |
+| Pod Security Standards, Image Scanning | 06 |
+| Network Policies, Secrets Encryption | 06 |
+| Cluster Upgrade, CRDs | 07 |
+| Namespaces, RBAC, Ingress, Kustomize | 08 |
+| Rolling Updates, Rollback, Observability | 08 |
+| FoodRush Production App | 08 |
+| kubeadm cluster setup | 09 |
+| Managed Kubernetes, Cloud Storage | 10 |
+| GitOps, ArgoCD, App of Apps | 11 |
+| Helm Charts, Templates, Dependencies | 12 |
+| Istio Traffic Management, mTLS, Canary | 13 |
 
 ---
 
 ## 📈 Progress
 
-- [x] Stage 0 — Environment and Basics
-- [x] Stage 1 — Docker Fundamentals
-- [x] Stage 2 — Multi Container Systems
-- [x] Stage 3 — Kubernetes Motivation
-- [x] Stage 4 — Kubernetes Beginner Projects
-- [ ] Stage 4-ext — Workloads, Scheduling, Security, Cluster Admin
-- [x] Stage 5 — Production Kubernetes (FoodRush)
-- [ ] Stage 5b — Self Managed Kubernetes (kubeadm)
-- [ ] Stage 5c — Managed Kubernetes (AKS)
-- [ ] Stage 5d — ArgoCD GitOps (In Depth)
-- [ ] Stage 6 — Helm (In Depth)
-- [ ] Stage 7 — Istio (In Depth)
-- [ ] Final Capstone Project
+- [x] 01 — Docker Fundamentals
+- [x] 02 — Multi Container Docker
+- [x] 03 — Kubernetes Basics
+- [ ] 04 — Kubernetes Workloads
+- [ ] 05 — Kubernetes Scheduling
+- [ ] 06 — Kubernetes Security
+- [ ] 07 — Kubernetes Cluster Admin
+- [x] 08 — Production Kubernetes (FoodRush)
+- [ ] 09 — Self Managed Cluster (kubeadm)
+- [ ] 10 — Managed Cloud Kubernetes (AKS)
+- [ ] 11 — GitOps with ArgoCD
+- [ ] 12 — Helm
+- [ ] 13 — Istio Service Mesh
+- [ ] 14 — Capstone Project
 
 ---
 
