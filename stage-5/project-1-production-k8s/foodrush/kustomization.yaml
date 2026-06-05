@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Apply resources in this order
+resources:
+  # 1. Namespaces first (everything else depends on these)
+  - namespaces/namespaces.yaml
+
+  # 2. Data layer (database + cache)
+  - database/database.yaml
+  - database/redis.yaml
+
+  # 3. Backend services
+  - restaurant-service/restaurant-service.yaml
+  - order-service/order-service.yaml
+  - api-gateway/api-gateway.yaml
+
+  # 4. Frontend
+  - frontend/frontend.yaml
+
+  # 5. Ingress (after services are ready)
+  - ingress/ingress.yaml
+
+  # 6. RBAC
+  - rbac/rbac.yaml
+
+  # 7. Resource management
+  - resource-management/limitrange.yaml
+  - resource-management/resourcequota.yaml

@@ -1,6 +1,7 @@
 # 🚀 My DevOps Journey — Docker to Production Kubernetes
 
-A hands-on learning path from containers to production Kubernetes.
+A complete hands-on learning path covering Docker, Kubernetes, ArgoCD, Helm, and Istio
+from absolute beginner to production-ready deployments.
 
 ---
 
@@ -15,16 +16,21 @@ Every concept follows: **Analogy → Problem → Solution → Project → Debug 
 
 | Stage | Topic | Status |
 |-------|-------|--------|
-| 0 | Environment & Basics | ✅ Done |
+| 0 | Environment and Basics | ✅ Done |
 | 1 | Docker Fundamentals (5 projects) | ✅ Done |
 | 2 | Multi Container Systems | ✅ Done |
 | 3 | Kubernetes Motivation | ✅ Done |
-| 4 | Kubernetes Beginner Projects (extended) | 🔄 In Progress |
-| 5 | Production Kubernetes (Minikube) | ✅ Done |
+| 4 | Kubernetes Beginner Projects | ✅ Done |
+| 4-ext | Workloads: StatefulSets, DaemonSets, Jobs, CronJobs | ⏳ Upcoming |
+| 4-ext | Scheduling: VPA, Node Affinity, Taints, Resource Quotas | ⏳ Upcoming |
+| 4-ext | Security: PSS, Image Scanning, Network Policies | ⏳ Upcoming |
+| 4-ext | Cluster Admin: Upgrade, CRDs | ⏳ Upcoming |
+| 5 | Production Kubernetes - FoodRush App | ✅ Done |
 | 5b | Self Managed Kubernetes (kubeadm) | ⏳ Upcoming |
 | 5c | Managed Kubernetes (AKS) | ⏳ Upcoming |
-| 6 | Helm | ⏳ Upcoming |
-| 7 | Istio Service Mesh | ⏳ Upcoming |
+| 5d | ArgoCD - GitOps In Depth | ⏳ Upcoming |
+| 6 | Helm - In Depth | ⏳ Upcoming |
+| 7 | Istio Service Mesh - In Depth | ⏳ Upcoming |
 | 🏁 | Capstone Project | ⏳ Upcoming |
 
 ---
@@ -39,75 +45,92 @@ kubepath/
 │       └── app.py
 ├── stage-1/
 │   ├── project-1-first-container/
-│   │   ├── Dockerfile
-│   │   └── app.py
 │   ├── project-2-first-dockerfile/
-│   │   ├── Dockerfile
-│   │   ├── app.py
-│   │   └── requirements.txt
 │   ├── project-3-env-variables/
-│   │   ├── Dockerfile
-│   │   ├── app.py
-│   │   ├── requirements.txt
-│   │   ├── .env                  # gitignored
-│   │   └── .gitignore
 │   ├── project-4-persistent-storage/
-│   │   ├── Dockerfile
-│   │   ├── app.py
-│   │   ├── requirements.txt
-│   │   └── data/                 # mounted volume
 │   └── project-5-container-networking/
-│       ├── Dockerfile
-│       ├── app.py
-│       └── requirements.txt
 ├── stage-2/
 │   └── project-1-three-tier-app/
 │       ├── docker-compose.yml
 │       ├── frontend/
-│       │   ├── Dockerfile
-│       │   ├── index.html
-│       │   └── nginx.conf
 │       ├── backend/
-│       │   ├── Dockerfile
-│       │   ├── app.py
-│       │   └── requirements.txt
 │       └── db/
-│           └── init.sql
 ├── stage-4/
 │   ├── project-1-single-container/
-│   │   ├── pod.yaml
-│   │   └── deployment.yaml
 │   ├── project-2-service-networking/
-│   │   ├── deployment.yaml
-│   │   └── service.yaml
 │   ├── project-3-config-management/
-│   │   ├── configmap.yaml
-│   │   ├── secret.yaml
-│   │   └── deployment.yaml
 │   ├── project-4-persistent-storage/
-│   │   ├── pv.yaml
-│   │   ├── pvc.yaml
-│   │   └── deployment.yaml
-│   └── project-5-scaling-healthchecks/
-│       ├── deployment.yaml
-│       └── hpa.yaml
+│   ├── project-5-scaling-healthchecks/
+│   ├── project-6-workloads/
+│   │   ├── statefulsets/
+│   │   ├── daemonsets/
+│   │   ├── replicasets/
+│   │   ├── jobs/
+│   │   └── cronjobs/
+│   ├── project-7-scheduling/
+│   │   ├── hpa-production/
+│   │   ├── vpa/
+│   │   ├── node-affinity/
+│   │   ├── taints-tolerations/
+│   │   └── resource-quotas/
+│   ├── project-8-security/
+│   │   ├── pod-security-standards/
+│   │   ├── image-scanning/
+│   │   ├── network-policies/
+│   │   └── secrets-encryption/
+│   └── project-9-cluster-admin/
+│       ├── cluster-upgrade/
+│       └── crds/
 ├── stage-5/
 │   └── project-1-production-k8s/
+│       ├── ingress/                   # ingress learning exercises
+│       └── foodrush/                  # production grade app
+│           ├── kustomization.yaml     # single command deploy
+│           ├── namespaces/
+│           ├── database/
+│           ├── restaurant-service/
+│           ├── order-service/
+│           ├── api-gateway/
+│           ├── frontend/
+│           ├── ingress/
+│           ├── rbac/
+│           ├── resource-management/
+│           ├── rolling-updates/
+│           └── monitoring/
 ├── stage-5b/
-│   └── project-1-kubeadm/
-│       └── setup-guide.md
+│   └── project-1-kubeadm/             # self managed cluster
 ├── stage-5c/
-│   └── project-1-aks/
-│       └── setup-guide.md
+│   └── project-1-aks/                 # managed cloud k8s
+├── stage-5d/
+│   └── project-1-argocd/              # gitops in depth
+│       ├── install/
+│       ├── applications/
+│       ├── app-of-apps/
+│       ├── multi-env/
+│       └── advanced/
 ├── stage-6/
-│   └── project-1-helm-charts/
-└── stage-7/
-    └── project-1-istio-mesh/
+│   └── project-1-helm-charts/         # helm in depth
+│       ├── basics/
+│       ├── foodrush-chart/
+│       ├── dependencies/
+│       └── advanced/
+├── stage-7/
+│   └── project-1-istio-mesh/          # istio in depth
+│       ├── install/
+│       ├── traffic-management/
+│       ├── canary/
+│       ├── mtls/
+│       └── observability/
+└── capstone/
+    ├── ci-cd/
+    ├── multi-env/
+    ├── monitoring/
+    └── microservices/
 </pre>
 
 ---
 
-## 🛠️ Tools
+## 🛠️ Tools and Technologies
 
 | Tool | Purpose | Stage |
 |------|---------|-------|
@@ -115,44 +138,62 @@ kubepath/
 | Docker Compose | Multi-container orchestration | 2 |
 | Kubernetes | Container orchestration | 4 |
 | Minikube | Local K8s cluster | 4 |
-| kubeadm | Self managed cluster | 5b |
-| AKS | Managed cloud K8s | 5c |
-| Helm | K8s package manager | 6 |
+| Kustomize | K8s config management | 5 |
+| kubeadm | Self managed cluster setup | 5b |
+| AKS | Managed cloud Kubernetes | 5c |
+| ArgoCD | GitOps continuous delivery | 5d |
+| Helm | Kubernetes package manager | 6 |
 | Istio | Service mesh | 7 |
+| Prometheus | Metrics collection | 5 |
+| Grafana | Metrics visualization | 5 |
 
 ---
 
-## 📚 Key Concepts
+## 📚 Key Concepts by Stage
 
 | Concept | Stage |
 |---------|-------|
-| Containers & Dockerfiles | 1 |
+| Containers and Dockerfiles | 1 |
 | Layer Caching | 1 |
-| Volumes & Networks | 1-2 |
+| Volumes and Networks | 1-2 |
 | Docker Compose | 2 |
-| Pod & Deployment | 4 |
-| Service & Networking | 4 |
-| ConfigMap & Secret | 4 |
-| PersistentVolume/Claim | 4 |
-| HPA & Health Checks | 4 |
-| Ingress & RBAC | 5 |
+| Pod and Deployment | 4 |
+| Service and Networking | 4 |
+| ConfigMap and Secret | 4 |
+| PersistentVolume and PVC | 4 |
+| HPA and Health Checks | 4 |
+| StatefulSets, DaemonSets | 4-ext |
+| Jobs and CronJobs | 4-ext |
+| VPA, Node Affinity, Taints | 4-ext |
+| Network Policies, PSS | 4-ext |
+| CRDs, Cluster Upgrade | 4-ext |
+| Namespaces and RBAC | 5 |
+| Ingress and Annotations | 5 |
+| Resource Management | 5 |
+| Rolling Updates and Rollback | 5 |
+| Observability | 5 |
+| Kustomize | 5 |
+| GitOps with ArgoCD | 5d |
 | Helm Charts | 6 |
-| Istio mTLS & Canary | 7 |
+| Istio Traffic Management | 7 |
+| Istio mTLS and Canary | 7 |
 
 ---
 
 ## 📈 Progress
 
-- [x] Stage 0 — Environment & Basics
+- [x] Stage 0 — Environment and Basics
 - [x] Stage 1 — Docker Fundamentals
 - [x] Stage 2 — Multi Container Systems
 - [x] Stage 3 — Kubernetes Motivation
-- [ ] Stage 4 — Kubernetes Beginner Projects (in progress)
-- [ ] Stage 5 — Production Kubernetes
+- [x] Stage 4 — Kubernetes Beginner Projects
+- [ ] Stage 4-ext — Workloads, Scheduling, Security, Cluster Admin
+- [x] Stage 5 — Production Kubernetes (FoodRush)
 - [ ] Stage 5b — Self Managed Kubernetes (kubeadm)
 - [ ] Stage 5c — Managed Kubernetes (AKS)
-- [ ] Stage 6 — Helm
-- [ ] Stage 7 — Istio
+- [ ] Stage 5d — ArgoCD GitOps (In Depth)
+- [ ] Stage 6 — Helm (In Depth)
+- [ ] Stage 7 — Istio (In Depth)
 - [ ] Final Capstone Project
 
 ---
@@ -161,6 +202,8 @@ kubepath/
 
 - [Docker Docs](https://docs.docker.com)
 - [Kubernetes Docs](https://kubernetes.io/docs)
-- [Minikube Docs](https://minikube.sigs.k8s.io/docs)
+- [Kustomize Docs](https://kustomize.io)
+- [ArgoCD Docs](https://argo-cd.readthedocs.io)
 - [Helm Docs](https://helm.sh/docs)
 - [Istio Docs](https://istio.io/docs)
+- [Minikube Docs](https://minikube.sigs.k8s.io/docs)

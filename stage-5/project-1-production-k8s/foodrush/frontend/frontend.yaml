@@ -19,6 +19,7 @@ spec:
         tier: frontend
         version: v1
     spec:
+      serviceAccountName: frontend-sa
       containers:
         - name: frontend
           image: foodrush-frontend:v1
